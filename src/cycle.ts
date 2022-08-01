@@ -43,7 +43,7 @@ function cycle(dir: Direction, win?: Window) {
 		.filter(
 			(w) =>
 				w.title() !== '' &&
-				!w.title().startsWith('Find in page\n') &&
+				!w.title().startsWith('Find in page') &&
 				// app.name() === 'Google Chrome' && //trying to () this with above condition but IDE formatting keeps auto-removing parentheses. whatever it's fine.
 				!w.isMinimized(),
 		);

@@ -29,7 +29,7 @@ onKey('tab', hyper, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -57,7 +57,7 @@ onKey('tab', hyperShift, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -84,7 +84,7 @@ onKey(['left', 'j'], hyper, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -110,10 +110,11 @@ onKey(['left', 'j'], hyper, () => {
 
 onKey(['right', 'l'], hyper, () => {
 	let win = Window.focused();
+	log(win?.title());
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -157,7 +158,7 @@ onKey(['up', 'i'], hyper, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -178,7 +179,7 @@ onKey(['down', 'k'], hyper, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -200,7 +201,7 @@ onKey('return', hyper, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -218,7 +219,7 @@ onKey(['left', 'j'], hyperShift, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -244,7 +245,7 @@ onKey(['right', 'l'], hyperShift, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -272,7 +273,7 @@ onKey(['up', 'i'], hyperShift, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -298,7 +299,7 @@ onKey(['down', 'k'], hyperShift, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -326,7 +327,7 @@ onKey('return', hyperShift, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -369,7 +370,7 @@ onKey('p', hyper, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -407,7 +408,7 @@ onKey('.', hyper, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -436,7 +437,7 @@ onKey('m', hyper, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
@@ -605,7 +606,7 @@ onKey('h', ['cmd'], (_: Key, repeated: boolean) => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page\n')) {
+	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
 		win = Window.at(location);
