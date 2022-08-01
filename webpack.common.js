@@ -5,7 +5,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
 	entry: {
-		'phoenix.js': './src/phoenix.ts',
+		'.phoenix.js': './src/phoenix.ts',
 		'phoenix.debug.js': './src/phoenix.ts',
 	},
 	output: {

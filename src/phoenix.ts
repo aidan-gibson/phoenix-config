@@ -90,25 +90,12 @@ onKey(['right', 'l'], hyper, () => {
 	if (!win) {
 		return;
 	}
-	const app = win.app();
-	// log('TEST' + win?.title());
 	if (win.title().startsWith('Find in page\n')) {
-		// TODO select the window behind it
-		// const wantedWindow = win.title().replace('Find in page\n    ', '');
-
-		// regex replaces "Find in page\n    " with nothing (\s is whitespace, including \n)
-		const wantedWindow = win.title().replace(/Find in page\s+/, '');
-		const others = app.windows().filter(
-			(w: Window) => w.title().includes(wantedWindow), //&&
-			//!w.title().includes('Find in page'),
-		);
-		log('others!', others);
-		// log('others[0].title()', others[0].title());
-		log('WantedWindow =', wantedWindow);
-		win = others[1];
-		if (others.length > 1) {
-			// if there are multiple windows with the same title
-			// select the one closer in number
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
 		}
 	}
 
@@ -359,7 +346,7 @@ onKey('m', hyper, () => {
 	}
 });
 
-// onKey('m', hyper, () => {
+// onKey('q', hyper, () => {
 // 	const s = screenAt(Mouse.location());
 // 	log(s.identifier(), Mouse.location());
 // });

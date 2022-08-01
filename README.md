@@ -1,4 +1,7 @@
-Chrome Finder Box Issues
+# add mouse control
+dragging to corners, top, etc
+
+# Chrome Finder Box Issues
 
 Hyper+right on finder box alone moves the finder box
 finder box hangs the entire thing when Cmd+Esc
@@ -42,6 +45,9 @@ window.title on window with search elem is
 # hardlink
 `ln phoenix.js ~/.phoenix.js` from out folder
 symlink wasn't working, the phoenix app kept overwriting it. dw tho, hardlink should be just fine (?)
+hardlink don't work either cuz the build replaces the .js files when it runs, breaking the link. gotta change the webpack output dir (which proved to be super annoying/difficult/impossible) or i can use hazel to automatically copy the file on builds
+
+# adsf
 Forked from [this](https://github.com/mafredri/phoenix-config/tree/main)
 [typings](https://github.com/mafredri/phoenix-typings)
 
