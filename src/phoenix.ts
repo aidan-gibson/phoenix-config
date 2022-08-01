@@ -7,7 +7,7 @@ import log from './logger';
 // import {TimerStopper} from './misc/coffee';
 // import coffeTimer from './misc/coffee';
 // import * as terminal from './misc/terminal';
-import {showCenterOn, titleModal} from './modal';
+import {applyMargin, showCenterOn, titleModal} from './modal';
 import {Scanner} from './scan';
 import {screenAt} from './screen';
 import {setFrame, toggleMaximized} from './window';
@@ -86,10 +86,30 @@ onKey(['left', 'j'], hyper, () => {
 });
 
 onKey(['right', 'l'], hyper, () => {
-	const win = Window.focused();
-	log('TEST' + win?.title());
+	let win = Window.focused();
 	if (!win) {
 		return;
+	}
+	const app = win.app();
+	// log('TEST' + win?.title());
+	if (win.title().startsWith('Find in page\n')) {
+		// TODO select the window behind it
+		// const wantedWindow = win.title().replace('Find in page\n    ', '');
+
+		// regex replaces "Find in page\n    " with nothing (\s is whitespace, including \n)
+		const wantedWindow = win.title().replace(/Find in page\s+/, '');
+		const others = app.windows().filter(
+			(w: Window) => w.title().includes(wantedWindow), //&&
+			//!w.title().includes('Find in page'),
+		);
+		log('others!', others);
+		// log('others[0].title()', others[0].title());
+		log('WantedWindow =', wantedWindow);
+		win = others[1];
+		if (others.length > 1) {
+			// if there are multiple windows with the same title
+			// select the one closer in number
+		}
 	}
 
 	const {width, height, x, y} = win.screen().flippedVisibleFrame();
