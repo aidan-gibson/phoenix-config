@@ -1,7 +1,11 @@
-# Phoenix configuration
+# hardlink
+`ln phoenix.js ~/.phoenix.js` from out folder
+symlink wasn't working, the phoenix app kept overwriting it. dw tho, hardlink should be just fine (?)
+Forked from [this](https://github.com/mafredri/phoenix-config/tree/main)
+[typings](https://github.com/mafredri/phoenix-typings)
 
-This is my personal [Phoenix](https://github.com/kasper/phoenix) configuration, written in TypeScript. I also created [typings](https://github.com/mafredri/phoenix-typings) for it, feel free to use them.
 
+karabiner shit seems done; just phoenix now
 ## Key bindings
 
 The definition of `hyper` and `hyperShift` can be found in [src/config.ts](src/config.ts).
@@ -20,23 +24,19 @@ The definition of `hyper` and `hyperShift` can be found in [src/config.ts](src/c
 * `hyperShift + Up` (Move window to top edge of screen)
 * `hyperShift + Down` (Move window to bottom edge of screen)
 * `hyperShift + Return` (Move window to center of screen)
-* `hyperShift + Tab` (Jump to next screen whilst maintaining current window size)
+* `hyperShift + Tab` (Jump focused window to next screen whilst maintaining current window size)
 
 Use combos of the key bindings to further place the windows:
 
 * `hyper + Left` + `hyper + Down` (Bottom left corner of screen)
 * `hyper + Enter` + `hyper + Up` (Top half of screen, full width)
 
-I've optimized the key bindings for my common use-case, showing two windows on one screen and moving windows between screens.
+
 
 ### Misc bindings
 
-* `hyper + c` (Start coffee timer, defaults to 8 minutes)
-* `hyper + +` (Increase monitor brightness using external script)
-* `hyper + -` (Decrease monitor brightness using external script)
+
 * `hyper + Space` (Experimental: search for windows, tab to cycle, enter to switch, esc to cancel)
-* `§` (Show or hide the last used Terminal window)
-* `Cmd + §` (Cycle between Terminal windows)
 * `Cmd + Escape` (Cycle between windows of current application, including minimized and windows on a different screen)
 * `Cmd + Shift + Escape` (Same as `Cmd + Escape` except in reverse order)
 * `Cmd + h` (Hides the focused app or all visible apps if held down)

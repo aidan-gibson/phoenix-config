@@ -3,23 +3,23 @@ import {hyper, hyperShift} from './config';
 import {cycleBackward, cycleForward} from './cycle';
 import {onKey} from './key';
 import log from './logger';
-import {brightness} from './misc/brightness';
+// import {brightness} from './misc/brightness';
 import {TimerStopper} from './misc/coffee';
-import coffeTimer from './misc/coffee';
-import * as terminal from './misc/terminal';
-import {titleModal, showCenterOn} from './modal';
+// import coffeTimer from './misc/coffee';
+// import * as terminal from './misc/terminal';
+import {showCenterOn, titleModal} from './modal';
 import {Scanner} from './scan';
-import {setFrame, toggleMaximized} from './window';
 import {screenAt} from './screen';
+import {setFrame, toggleMaximized} from './window';
 
 const scanner = new Scanner();
-let coffee: TimerStopper | null;
+// let coffee: TimerStopper | null;
 
 Phoenix.set({
 	daemon: true,
 	openAtLogin: true,
 });
-
+// only triggers on actual screen change: doesn't trigger on changing focus to another screen TODO
 Event.on('screensDidChange', () => {
 	log('Screens changed');
 });
@@ -253,18 +253,18 @@ onKey('return', hyperShift, () => {
 	});
 });
 
-onKey('§', [], (_, repeated) => {
-	if (repeated) {
-		return;
-	}
-	terminal.toggle();
-});
-onKey('§', ['cmd'], (_, repeated) => {
-	if (repeated) {
-		return;
-	}
-	terminal.cycleWindows();
-});
+// onKey('§', [], (_, repeated) => {
+// 	if (repeated) {
+// 		return;
+// 	}
+// 	terminal.toggle();
+// });
+// onKey('§', ['cmd'], (_, repeated) => {
+// 	if (repeated) {
+// 		return;
+// 	}
+// 	terminal.cycleWindows();
+// });
 
 onKey('p', hyper, () => {
 	const win = Window.focused();
@@ -313,45 +313,45 @@ onKey('.', hyper, () => {
 		);
 	}
 });
-
-onKey('delete', hyper, () => {
-	const win = Window.focused();
-	if (win) {
-		const visible = win.screen().windows({visible: true});
-		log(visible.map((w) => w.title()));
-		// log(win.screen().windows({visible: true}).map(w => w.title()));
-		// log(win.others({visible: true}).map(w => w.title()));
-		win.minimize();
-		if (visible.length) {
-			const next = visible[visible.length > 1 ? 1 : 0];
-			log('focusing: ' + next.title());
-			next.focus();
-		}
-		// win.focusClosestNeighbor('east');
-		// const others = win.others({visible: true});
-		// if (others.length) {
-		// 	log(others.map(w => w.title()));
-		// 	others[0].focus();
-		// }
-	}
-});
+// minimize code, doesn't work
+// onKey('delete', hyper, () => {
+// 	const win = Window.focused();
+// 	if (win) {
+// 		const visible = win.screen().windows({visible: true});
+// 		log(visible.map((w) => w.title()));
+// 		// log(win.screen().windows({visible: true}).map(w => w.title()));
+// 		// log(win.others({visible: true}).map(w => w.title()));
+// 		win.minimize();
+// 		if (visible.length) {
+// 			const next = visible[visible.length > 1 ? 1 : 0];
+// 			log('focusing: ' + next.title());
+// 			next.focus();
+// 		}
+// 		// win.focusClosestNeighbor('east');
+// 		// const others = win.others({visible: true});
+// 		// if (others.length) {
+// 		// 	log(others.map(w => w.title()));
+// 		// 	others[0].focus();
+// 		// }
+// 	}
+// });
 
 onKey('m', hyper, () => {
 	const s = screenAt(Mouse.location());
 	log(s.identifier(), Mouse.location());
 });
 
-onKey('=', hyper, () => brightness(+10));
-onKey('-', hyper, () => brightness(-10));
+// onKey('=', hyper, () => brightness(+10));
+// onKey('-', hyper, () => brightness(-10));
 
-onKey('c', hyper, () => {
-	if (coffee) {
-		coffee.stop();
-		coffee = null;
-		return;
-	}
-	coffee = coffeTimer({screen: Screen.main(), timeout: 8});
-});
+// onKey('c', hyper, () => {
+// 	if (coffee) {
+// 		coffee.stop();
+// 		coffee = null;
+// 		return;
+// 	}
+// 	coffee = coffeTimer({screen: Screen.main(), timeout: 8});
+// });
 
 onKey('escape', ['cmd'], () => cycleForward(Window.focused()));
 onKey('escape', ['cmd', 'shift'], () => cycleBackward(Window.focused()));
