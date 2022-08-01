@@ -36,7 +36,6 @@ function cycle(dir: Direction, win?: Window) {
 	}
 
 	const app = win.app();
-	log(app.name());
 	const others = app
 		.windows()
 		// A window without a title is usually unfocusable,
@@ -51,6 +50,7 @@ function cycle(dir: Direction, win?: Window) {
 
 	// Do nothing when there is only one window.
 	if (others.length < 2) {
+		log('ONE WINDOW');
 		return;
 	}
 	log(others);

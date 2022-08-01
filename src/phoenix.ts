@@ -25,9 +25,17 @@ Event.on('screensDidChange', () => {
 });
 
 onKey('tab', hyper, () => {
-	const win = Window.focused();
+	let win = Window.focused();
 	if (!win) {
 		return;
+	}
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
 	}
 
 	const oldScreen = win.screen();
@@ -45,11 +53,18 @@ onKey('tab', hyper, () => {
 });
 
 onKey('tab', hyperShift, () => {
-	const win = Window.focused();
+	let win = Window.focused();
 	if (!win) {
 		return;
 	}
-
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
+	}
 	const oldScreen = win.screen();
 	const newScreen = oldScreen.next();
 
@@ -65,9 +80,17 @@ onKey('tab', hyperShift, () => {
 });
 
 onKey(['left', 'j'], hyper, () => {
-	const win = Window.focused();
+	let win = Window.focused();
 	if (!win) {
 		return;
+	}
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
 	}
 
 	const {width, height, x, y} = win.screen().flippedVisibleFrame();
@@ -130,9 +153,17 @@ onKey(['right', 'l'], hyper, () => {
 });
 
 onKey(['up', 'i'], hyper, () => {
-	const win = Window.focused();
+	let win = Window.focused();
 	if (!win) {
 		return;
+	}
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
 	}
 
 	const {width, x} = win.frame();
@@ -143,9 +174,17 @@ onKey(['up', 'i'], hyper, () => {
 });
 
 onKey(['down', 'k'], hyper, () => {
-	const win = Window.focused();
+	let win = Window.focused();
 	if (!win) {
 		return;
+	}
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
 	}
 
 	const {width, x} = win.frame();
@@ -157,16 +196,35 @@ onKey(['down', 'k'], hyper, () => {
 });
 
 onKey('return', hyper, () => {
-	const win = Window.focused();
+	let win = Window.focused();
+	if (!win) {
+		return;
+	}
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
+	}
 	if (win) {
 		toggleMaximized(win);
 	}
 });
 
 onKey(['left', 'j'], hyperShift, () => {
-	const win = Window.focused();
+	let win = Window.focused();
 	if (!win) {
 		return;
+	}
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
 	}
 
 	const {width, height, y, x: fX} = win.frame();
@@ -182,9 +240,17 @@ onKey(['left', 'j'], hyperShift, () => {
 });
 
 onKey(['right', 'l'], hyperShift, () => {
-	const win = Window.focused();
+	let win = Window.focused();
 	if (!win) {
 		return;
+	}
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
 	}
 
 	const {width, height, y, x: fX} = win.frame();
@@ -202,9 +268,17 @@ onKey(['right', 'l'], hyperShift, () => {
 });
 
 onKey(['up', 'i'], hyperShift, () => {
-	const win = Window.focused();
+	let win = Window.focused();
 	if (!win) {
 		return;
+	}
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
 	}
 
 	const {width, height, x, y: frameY} = win.frame();
@@ -220,9 +294,17 @@ onKey(['up', 'i'], hyperShift, () => {
 });
 
 onKey(['down', 'k'], hyperShift, () => {
-	const win = Window.focused();
+	let win = Window.focused();
 	if (!win) {
 		return;
+	}
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
 	}
 
 	const {width, height, x, y: frameY} = win.frame();
@@ -240,9 +322,17 @@ onKey(['down', 'k'], hyperShift, () => {
 });
 
 onKey('return', hyperShift, () => {
-	const win = Window.focused();
+	let win = Window.focused();
 	if (!win) {
 		return;
+	}
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
 	}
 
 	const {width, height} = win.frame();
@@ -275,9 +365,17 @@ onKey('return', hyperShift, () => {
 // });
 
 onKey('p', hyper, () => {
-	const win = Window.focused();
+	let win = Window.focused();
 	if (!win) {
 		return;
+	}
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
 	}
 	const app = win.app().name();
 	const bundleId = win.app().bundleIdentifier();
@@ -305,7 +403,18 @@ onKey('p', hyper, () => {
 });
 
 onKey('.', hyper, () => {
-	const win = Window.focused();
+	let win = Window.focused();
+	if (!win) {
+		return;
+	}
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
+	}
 	if (win) {
 		log(
 			win
@@ -323,7 +432,18 @@ onKey('.', hyper, () => {
 });
 
 onKey('m', hyper, () => {
-	const win = Window.focused();
+	let win = Window.focused();
+	if (!win) {
+		return;
+	}
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
+	}
 	Phoenix.log('MINIMIZE CODE');
 	log('MINIMIZE CODE');
 	if (win) {
@@ -363,9 +483,16 @@ onKey('m', hyper, () => {
 // 	coffee = coffeTimer({screen: Screen.main(), timeout: 8});
 // });
 
-onKey('escape', ['cmd'], () => cycleForward(Window.focused())); //hangs when a Cmd+F has been hit in chrome
-onKey('escape', ['cmd', 'shift'], () => cycleBackward(Window.focused()));
+onKey('escape', ['cmd'], () => {
+	const win = Window.focused();
+	cycleForward(win);
+});
 
+onKey('escape', ['cmd', 'shift'], () => {
+	const win = Window.focused();
+	cycleBackward(win);
+});
+// TODO did not implement chrome cmd+f fix
 // Experimental: Search for windows and cycle between results.
 onKey('space', hyper, () => {
 	const m = new Modal();
@@ -474,7 +601,19 @@ onKey('h', ['cmd'], (_: Key, repeated: boolean) => {
 		return;
 	}
 
-	const win = Window.focused();
+	let win = Window.focused();
+	if (!win) {
+		return;
+	}
+	if (win.title().startsWith('Find in page\n')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
+	}
+
 	if (win) {
 		win.app().hide();
 	}
