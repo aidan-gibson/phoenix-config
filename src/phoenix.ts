@@ -4,7 +4,7 @@ import {cycleBackward, cycleForward} from './cycle';
 import {onKey} from './key';
 import log from './logger';
 // import {brightness} from './misc/brightness';
-import {TimerStopper} from './misc/coffee';
+// import {TimerStopper} from './misc/coffee';
 // import coffeTimer from './misc/coffee';
 // import * as terminal from './misc/terminal';
 import {showCenterOn, titleModal} from './modal';
@@ -16,7 +16,7 @@ const scanner = new Scanner();
 // let coffee: TimerStopper | null;
 
 Phoenix.set({
-	daemon: true,
+	daemon: false,
 	openAtLogin: true,
 });
 // only triggers on actual screen change: doesn't trigger on changing focus to another screen TODO
@@ -87,6 +87,7 @@ onKey(['left', 'j'], hyper, () => {
 
 onKey(['right', 'l'], hyper, () => {
 	const win = Window.focused();
+	log('TEST' + win?.title());
 	if (!win) {
 		return;
 	}
@@ -313,33 +314,35 @@ onKey('.', hyper, () => {
 		);
 	}
 });
-// minimize code, doesn't work
-// onKey('delete', hyper, () => {
-// 	const win = Window.focused();
-// 	if (win) {
-// 		const visible = win.screen().windows({visible: true});
-// 		log(visible.map((w) => w.title()));
-// 		// log(win.screen().windows({visible: true}).map(w => w.title()));
-// 		// log(win.others({visible: true}).map(w => w.title()));
-// 		win.minimize();
-// 		if (visible.length) {
-// 			const next = visible[visible.length > 1 ? 1 : 0];
-// 			log('focusing: ' + next.title());
-// 			next.focus();
-// 		}
-// 		// win.focusClosestNeighbor('east');
-// 		// const others = win.others({visible: true});
-// 		// if (others.length) {
-// 		// 	log(others.map(w => w.title()));
-// 		// 	others[0].focus();
-// 		// }
-// 	}
-// });
 
 onKey('m', hyper, () => {
-	const s = screenAt(Mouse.location());
-	log(s.identifier(), Mouse.location());
+	const win = Window.focused();
+	Phoenix.log('MINIMIZE CODE');
+	log('MINIMIZE CODE');
+	if (win) {
+		const visible = win.screen().windows({visible: true});
+		log(visible.map((w) => w.title()));
+		// log(win.screen().windows({visible: true}).map(w => w.title()));
+		// log(win.others({visible: true}).map(w => w.title()));
+		win.minimize();
+		if (visible.length) {
+			const next = visible[visible.length > 1 ? 1 : 0];
+			log('focusing: ' + next.title());
+			next.focus();
+		}
+		// win.focusClosestNeighbor('east');
+		// const others = win.others({visible: true});
+		// if (others.length) {
+		// 	log(others.map(w => w.title()));
+		// 	others[0].focus();
+		// }
+	}
 });
+
+// onKey('m', hyper, () => {
+// 	const s = screenAt(Mouse.location());
+// 	log(s.identifier(), Mouse.location());
+// });
 
 // onKey('=', hyper, () => brightness(+10));
 // onKey('-', hyper, () => brightness(-10));
@@ -353,7 +356,7 @@ onKey('m', hyper, () => {
 // 	coffee = coffeTimer({screen: Screen.main(), timeout: 8});
 // });
 
-onKey('escape', ['cmd'], () => cycleForward(Window.focused()));
+onKey('escape', ['cmd'], () => cycleForward(Window.focused())); //hangs when a Cmd+F has been hit in chrome
 onKey('escape', ['cmd', 'shift'], () => cycleBackward(Window.focused()));
 
 // Experimental: Search for windows and cycle between results.

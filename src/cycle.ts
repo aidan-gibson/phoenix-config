@@ -36,17 +36,24 @@ function cycle(dir: Direction, win?: Window) {
 	}
 
 	const app = win.app();
+	log(app.name());
 	const others = app
 		.windows()
 		// A window without a title is usually unfocusable,
 		// true for e.g. Finder, Chrome, etc.
-		.filter((w) => w.title() !== '' && !w.isMinimized());
+		.filter(
+			(w) =>
+				w.title() !== '' &&
+				!w.title().startsWith('Find in page\n') &&
+				// app.name() === 'Google Chrome' && //trying to () this with above condition but IDE formatting keeps auto-removing parentheses. whatever it's fine.
+				!w.isMinimized(),
+		);
 
 	// Do nothing when there is only one window.
 	if (others.length < 2) {
 		return;
 	}
-
+	log(others);
 	if (dir === Direction.Forward) {
 		updateTimestamp(win);
 	} else if (dir === Direction.Backward) {

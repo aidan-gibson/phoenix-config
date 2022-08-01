@@ -1,3 +1,44 @@
+Chrome Finder Box Issues
+
+Hyper+right on finder box alone moves the finder box
+finder box hangs the entire thing when Cmd+Esc
+
+
+window.title on search element alone is 
+"Find in page\n T-watcher Dashboard"
+
+window.title on window with search elem is
+"T-watcher Dashboard - Google Chrome"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # hardlink
 `ln phoenix.js ~/.phoenix.js` from out folder
 symlink wasn't working, the phoenix app kept overwriting it. dw tho, hardlink should be just fine (?)
@@ -37,7 +78,7 @@ Use combos of the key bindings to further place the windows:
 
 
 * `hyper + Space` (Experimental: search for windows, tab to cycle, enter to switch, esc to cancel)
-* `Cmd + Escape` (Cycle between windows of current application, including minimized and windows on a different screen)
+* `Cmd + Escape` (Cycle between windows of current application, (not) including minimized (togglable tho in cycle.ts line 43) and windows on a different screen)
 * `Cmd + Shift + Escape` (Same as `Cmd + Escape` except in reverse order)
 * `Cmd + h` (Hides the focused app or all visible apps if held down)
 

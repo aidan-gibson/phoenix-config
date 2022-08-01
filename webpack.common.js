@@ -9,7 +9,12 @@ module.exports = {
 		'phoenix.debug.js': './src/phoenix.ts',
 	},
 	output: {
+		// strictModuleErrorHandling: true,
 		path: path.resolve(__dirname, 'out'),
+		filename: '[name]',
+		// path: path.resolve('/Users/', 'aidangibson'),
+		// path: '/Users/aidangibson/',
+		// publicPath: '/',
 		filename: '[name]',
 	},
 	resolve: {
