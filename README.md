@@ -1,6 +1,8 @@
 # TODO
 memorize all keybinds
-
+make sure if statements are turned into 'if/else if' where appropriate.
+go balls to the walls optimizing , making functions, etc. gonna be extending on this for years and small efficiency gains will be noticed day-to-day.
+find duplicated code fragments with jetbrains
 ## spaces
 fat presets. i hit one button and it knows what to do with all the windows. 
 

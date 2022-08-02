@@ -146,33 +146,77 @@ onKey(['right', 'l'], hyper, () => {
 	}
 
 	const {width, height, x, y} = win.screen().flippedVisibleFrame();
-	const frame2 = {
-		width: Math.floor(width / 2),
-		height,
-		x: x + Math.ceil(width / 2),
-		y,
-	};
-	const frame3 = {
-		width: Math.floor(width / 3),
-		height,
-		x: x + Math.ceil((width / 3) * 2),
-		y,
-	};
-	const frame4 = {
-		width: Math.floor(width / 4),
-		height,
-		x: x + Math.ceil((width / 4) * 3),
-		y,
-	};
-	let frame = frame2;
-	if (objEq(win.frame(), frame2)) {
-		frame = frame3;
-	}
-	if (objEq(win.frame(), frame3)) {
-		frame = frame4;
-	}
+	if (height === 1415) {
+		const frame2 = {
+			width: Math.floor(width / 2),
+			height,
+			x: x + Math.ceil(width / 2),
+			y,
+		};
+		const frame3 = {
+			width: Math.floor(width / 3),
+			height,
+			x: x + Math.ceil((width / 3) * 2),
+			y,
+		};
+		const frame4 = {
+			width: Math.floor(width / 4),
+			height,
+			x: x + Math.ceil((width / 4) * 3),
+			y,
+		};
+		const frame5 = {
+			width: Math.floor(width / 6),
+			height,
+			x: x + Math.ceil((width / 6) * 5),
+			y,
+		};
+		const frame6 = {
+			width: Math.floor(width / 8),
+			height,
+			x: x + Math.ceil((width / 8) * 7),
+			y,
+		};
+		let frame = frame2;
+		if (objEq(win.frame(), frame2)) {
+			frame = frame3;
+		} else if (objEq(win.frame(), frame3)) {
+			frame = frame4;
+		} else if (objEq(win.frame(), frame4)) {
+			frame = frame5;
+		} else if (objEq(win.frame(), frame5)) {
+			frame = frame6;
+		}
 
-	setFrame(win, frame);
+		setFrame(win, frame);
+	} else {
+		const frame2 = {
+			width: Math.floor(width / 2),
+			height,
+			x: x + Math.ceil(width / 2),
+			y,
+		};
+		const frame3 = {
+			width: Math.floor(width / 3),
+			height,
+			x: x + Math.ceil((width / 3) * 2),
+			y,
+		};
+		const frame4 = {
+			width: Math.floor(width / 4),
+			height,
+			x: x + Math.ceil((width / 4) * 3),
+			y,
+		};
+		let frame = frame2;
+		if (objEq(win.frame(), frame2)) {
+			frame = frame3;
+		} else if (objEq(win.frame(), frame3)) {
+			frame = frame4;
+		}
+
+		setFrame(win, frame);
+	}
 });
 
 onKey(['up', 'i'], hyper, () => {
