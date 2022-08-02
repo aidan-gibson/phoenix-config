@@ -84,6 +84,7 @@ onKey(['left', 'j'], hyper, () => {
 	if (!win) {
 		return;
 	}
+	// fixes Chrome Cmd+F issues
 	if (win.title().startsWith('Find in page')) {
 		const location = win.topLeft();
 		location.y -= 1;
@@ -92,20 +93,41 @@ onKey(['left', 'j'], hyper, () => {
 			return;
 		}
 	}
-
 	const {width, height, x, y} = win.screen().flippedVisibleFrame();
-	const frame2 = {width: Math.floor(width / 2), height, x, y};
-	const frame3 = {width: Math.floor(width / 3), height, x, y};
-	const frame4 = {width: Math.floor(width / 4), height, x, y};
-	let frame = frame2;
-	if (objEq(win.frame(), frame2)) {
-		frame = frame3;
-	}
-	if (objEq(win.frame(), frame3)) {
-		frame = frame4;
-	}
+	log('HEIGHT', height);
+	// TODO apply this to hyper+right also
+	// if big screen in focus, give two more downsize options
+	if (height === 1415) {
+		const frame2 = {width: Math.floor(width / 2), height, x, y};
+		const frame3 = {width: Math.floor(width / 3), height, x, y};
+		const frame4 = {width: Math.floor(width / 4), height, x, y};
+		const frame5 = {width: Math.floor(width / 6), height, x, y};
+		const frame6 = {width: Math.floor(width / 8), height, x, y};
+		let frame = frame2;
+		if (objEq(win.frame(), frame2)) {
+			frame = frame3;
+		} else if (objEq(win.frame(), frame3)) {
+			frame = frame4;
+		} else if (objEq(win.frame(), frame4)) {
+			frame = frame5;
+		} else if (objEq(win.frame(), frame5)) {
+			frame = frame6;
+		}
+		setFrame(win, frame);
+	} else {
+		const frame2 = {width: Math.floor(width / 2), height, x, y};
+		const frame3 = {width: Math.floor(width / 3), height, x, y};
+		const frame4 = {width: Math.floor(width / 4), height, x, y};
+		let frame = frame2;
+		if (objEq(win.frame(), frame2)) {
+			frame = frame3;
+		}
+		if (objEq(win.frame(), frame3)) {
+			frame = frame4;
+		}
 
-	setFrame(win, frame);
+		setFrame(win, frame);
+	}
 });
 
 onKey(['right', 'l'], hyper, () => {

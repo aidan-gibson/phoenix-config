@@ -1,7 +1,6 @@
 # TODO
 memorize all keybinds
-## add mouse control
-drag to top, left, right
+
 ## spaces
 fat presets. i hit one button and it knows what to do with all the windows. 
 
@@ -20,7 +19,6 @@ Forked from [this](https://github.com/mafredri/phoenix-config/tree/main)
 [typings](https://github.com/mafredri/phoenix-typings)
 
 
-karabiner shit seems done; just phoenix now
 ## Key bindings
 
 The definition of `hyper` and `hyperShift` can be found in [src/config.ts](src/config.ts).
