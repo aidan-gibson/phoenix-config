@@ -1,46 +1,14 @@
-# add mouse control
-dragging to corners, top, etc
+# TODO
+memorize all keybinds
+## add mouse control
+drag to top, left, right
+## spaces
+fat presets. i hit one button and it knows what to do with all the windows. 
 
-# Chrome Finder Box Issues
-
-Hyper+right on finder box alone moves the finder box
-finder box hangs the entire thing when Cmd+Esc
-
-
-window.title on search element alone is 
-"Find in page\n T-watcher Dashboard"
-
-window.title on window with search elem is
-"T-watcher Dashboard - Google Chrome"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+depends on which apps are in play (vscode can always make small) and screens available and their respective sizes
+#example configs
+https://github.com/kasper/phoenix/wiki
+[documentation](https://kasper.github.io/phoenix/)
 
 # hardlink
 `ln phoenix.js ~/.phoenix.js` from out folder
@@ -72,6 +40,7 @@ The definition of `hyper` and `hyperShift` can be found in [src/config.ts](src/c
 * `hyperShift + Down` (Move window to bottom edge of screen)
 * `hyperShift + Return` (Move window to center of screen)
 * `hyperShift + Tab` (Jump focused window to next screen whilst maintaining current window size)
+* `hyperShift + h` maximize height
 
 Use combos of the key bindings to further place the windows:
 

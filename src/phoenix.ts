@@ -351,6 +351,31 @@ onKey('return', hyperShift, () => {
 		y: y + sHeight / 2 - height / 2,
 	});
 });
+// maximum height
+onKey('h', hyperShift, () => {
+	let win = Window.focused();
+	if (!win) {
+		return;
+	}
+	if (win.title().startsWith('Find in page')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
+	}
+	const {width, x} = win.frame();
+	const {height, y} = win.screen().flippedVisibleFrame();
+	const finalRect = {
+		x, //0+menu bar
+		y,
+		width,
+		height, //screen
+	};
+	log('GARSH');
+	setFrame(win, finalRect);
+});
 
 // onKey('§', [], (_, repeated) => {
 // 	if (repeated) {
