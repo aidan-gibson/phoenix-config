@@ -8,6 +8,10 @@
 ## spaces
 fat presets. i hit one button and it knows what to do with all the windows. 
 
+if big screen:
+Whatever is focused is center 1/2. other windows occupy the two edges
+
+
 depends on which apps are in play (vscode can always make small) and screens available and their respective sizes
 # example configs
 https://github.com/kasper/phoenix/wiki

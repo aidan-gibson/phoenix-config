@@ -19,11 +19,63 @@ Phoenix.set({
 	daemon: true,
 	openAtLogin: true,
 });
-// only triggers on actual screen change: doesn't trigger on changing focus to another screen TODO
+// only triggers on actual screen change: doesn't trigger on changing focus to another screen
 Event.on('screensDidChange', () => {
 	log('Screens changed');
 });
+// wider. if space on both sides expand both, if kissing right or left edge
+// for now, if top edge isn't
+onKey('=', hyperShift, () => {
+	let win = Window.focused();
+	if (!win) {
+		return;
+	}
+	if (win.title().startsWith('Find in page')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
+	}
+	const {width, height, x, y} = win.frame();
+	const screenWidth = win.screen().flippedVisibleFrame().width;
+	const widerFrame = {
+		width: width + Math.floor(screenWidth / 25),
+		height,
+		x: x - Math.ceil(screenWidth / 50), // x-half change in width
+		y,
+	};
 
+	setFrame(win, widerFrame);
+});
+// thinner
+// TODO make this robust. the below fnc and above fnc
+onKey('-', hyperShift, () => {
+	let win = Window.focused();
+	if (!win) {
+		return;
+	}
+	if (win.title().startsWith('Find in page')) {
+		const location = win.topLeft();
+		location.y -= 1;
+		win = Window.at(location);
+		if (!win) {
+			return;
+		}
+	}
+	const {width, height, x, y} = win.frame();
+	const screenWidth = win.screen().flippedVisibleFrame().width;
+	const thinnerFrame = {
+		width: width - Math.floor(screenWidth / 25),
+		height,
+		x: x + Math.ceil(screenWidth / 50),
+		y,
+	};
+
+	setFrame(win, thinnerFrame);
+});
+// (Jump to next screen whilst keeping relative size and placement)
 onKey('tab', hyper, () => {
 	let win = Window.focused();
 	if (!win) {
@@ -51,7 +103,7 @@ onKey('tab', hyper, () => {
 	);
 	setFrame(win, ratio(win.frame()));
 });
-
+// (Jump focused window to next screen whilst maintaining current window size)
 onKey('tab', hyperShift, () => {
 	let win = Window.focused();
 	if (!win) {
