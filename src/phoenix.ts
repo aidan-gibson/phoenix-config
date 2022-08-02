@@ -16,7 +16,7 @@ const scanner = new Scanner();
 // let coffee: TimerStopper | null;
 
 Phoenix.set({
-	daemon: false,
+	daemon: true,
 	openAtLogin: true,
 });
 // only triggers on actual screen change: doesn't trigger on changing focus to another screen TODO
