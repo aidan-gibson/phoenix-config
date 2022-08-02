@@ -1,13 +1,15 @@
 # TODO
-memorize all keybinds
-make sure if statements are turned into 'if/else if' where appropriate.
-go balls to the walls optimizing , making functions, etc. gonna be extending on this for years and small efficiency gains will be noticed day-to-day.
-find duplicated code fragments with jetbrains
+* memorize all keybinds
+* make sure if statements are turned into 'if/else if' where appropriate.
+* go balls to the walls optimizing , making functions, etc. gonna be extending on this for years and small efficiency gains will be noticed day-to-day.
+* find duplicated code fragments with jetbrains
+* spaces presets
+* look at the example configs to make sure there isn't a better way / look for inspo
 ## spaces
 fat presets. i hit one button and it knows what to do with all the windows. 
 
 depends on which apps are in play (vscode can always make small) and screens available and their respective sizes
-#example configs
+# example configs
 https://github.com/kasper/phoenix/wiki
 [documentation](https://kasper.github.io/phoenix/)
 
@@ -33,11 +35,14 @@ The definition of `hyper` and `hyperShift` can be found in [src/config.ts](src/c
 * `hyper + Down` (Bottom half of screen height, keeps current width)
 * `hyper + Return` (Toggle maximize, remembers unmaximized position)
 * `hyper + Tab` (Jump to next screen whilst keeping relative size and placement)
-* `hyper + Delete` (Minimize focused window)
+* `hyper + m` (Minimize focused window. holding it keeps going)
+
+Getting it around
 * `hyperShift + Left` (Move window to left edge of screen)
 * `hyperShift + Right` (Move window to right edge of screen)
 * `hyperShift + Up` (Move window to top edge of screen)
 * `hyperShift + Down` (Move window to bottom edge of screen)
+
 * `hyperShift + Return` (Move window to center of screen)
 * `hyperShift + Tab` (Jump focused window to next screen whilst maintaining current window size)
 * `hyperShift + h` maximize height

@@ -434,96 +434,83 @@ onKey('h', hyperShift, () => {
 	const {width, x} = win.frame();
 	const {height, y} = win.screen().flippedVisibleFrame();
 	const finalRect = {
-		x, //0+menu bar
+		x,
 		y,
 		width,
-		height, //screen
+		height,
 	};
 	log('GARSH');
 	setFrame(win, finalRect);
 });
 
-// onKey('§', [], (_, repeated) => {
-// 	if (repeated) {
+// onKey('p', hyper, () => {
+// 	let win = Window.focused();
+// 	if (!win) {
 // 		return;
 // 	}
-// 	terminal.toggle();
+// 	if (win.title().startsWith('Find in page')) {
+// 		const location = win.topLeft();
+// 		location.y -= 1;
+// 		win = Window.at(location);
+// 		if (!win) {
+// 			return;
+// 		}
+// 	}
+// 	const app = win.app().name();
+// 	const bundleId = win.app().bundleIdentifier();
+// 	const pid = win.app().processIdentifier();
+// 	const title = win.title();
+// 	const frame = win.frame();
+// 	const msg = [
+// 		`Application: ${app}`,
+// 		`Title: ${title}`,
+// 		`Frame: X=${frame.x}, Y=${frame.y}`,
+// 		`Size: H=${frame.height}, W=${frame.width}`,
+// 		`Bundle ID: ${bundleId}`,
+// 		`PID: ${pid}`,
+// 	].join('\n');
+//
+// 	log('Window information:\n' + msg);
+//
+// 	const modal = Modal.build({
+// 		duration: 10,
+// 		icon: win.app().icon(),
+// 		text: msg,
+// 		weight: 16,
+// 	});
+// 	showCenterOn(modal, Screen.main());
 // });
-// onKey('§', ['cmd'], (_, repeated) => {
-// 	if (repeated) {
+
+// onKey('.', hyper, () => {
+// 	let win = Window.focused();
+// 	if (!win) {
 // 		return;
 // 	}
-// 	terminal.cycleWindows();
+// 	if (win.title().startsWith('Find in page')) {
+// 		const location = win.topLeft();
+// 		location.y -= 1;
+// 		win = Window.at(location);
+// 		if (!win) {
+// 			return;
+// 		}
+// 	}
+// 	if (win) {
+// 		log(
+// 			win
+// 				.screen()
+// 				.windows({visible: true})
+// 				.map((w) => w.title()),
+// 		);
+// 		log(
+// 			win
+// 				.screen()
+// 				.windows()
+// 				.map((w) => w.title()),
+// 		);
+// 	}
 // });
 
-onKey('p', hyper, () => {
-	let win = Window.focused();
-	if (!win) {
-		return;
-	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
-	}
-	const app = win.app().name();
-	const bundleId = win.app().bundleIdentifier();
-	const pid = win.app().processIdentifier();
-	const title = win.title();
-	const frame = win.frame();
-	const msg = [
-		`Application: ${app}`,
-		`Title: ${title}`,
-		`Frame: X=${frame.x}, Y=${frame.y}`,
-		`Size: H=${frame.height}, W=${frame.width}`,
-		`Bundle ID: ${bundleId}`,
-		`PID: ${pid}`,
-	].join('\n');
-
-	log('Window information:\n' + msg);
-
-	const modal = Modal.build({
-		duration: 10,
-		icon: win.app().icon(),
-		text: msg,
-		weight: 16,
-	});
-	showCenterOn(modal, Screen.main());
-});
-
-onKey('.', hyper, () => {
-	let win = Window.focused();
-	if (!win) {
-		return;
-	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
-	}
-	if (win) {
-		log(
-			win
-				.screen()
-				.windows({visible: true})
-				.map((w) => w.title()),
-		);
-		log(
-			win
-				.screen()
-				.windows()
-				.map((w) => w.title()),
-		);
-	}
-});
-
-onKey('m', hyper, () => {
+onKey('m', hyperShift, () => {
 	let win = Window.focused();
 	if (!win) {
 		return;
@@ -558,23 +545,6 @@ onKey('m', hyper, () => {
 	}
 });
 
-// onKey('q', hyper, () => {
-// 	const s = screenAt(Mouse.location());
-// 	log(s.identifier(), Mouse.location());
-// });
-
-// onKey('=', hyper, () => brightness(+10));
-// onKey('-', hyper, () => brightness(-10));
-
-// onKey('c', hyper, () => {
-// 	if (coffee) {
-// 		coffee.stop();
-// 		coffee = null;
-// 		return;
-// 	}
-// 	coffee = coffeTimer({screen: Screen.main(), timeout: 8});
-// });
-
 onKey('escape', ['cmd'], () => {
 	const win = Window.focused();
 	cycleForward(win);
@@ -584,7 +554,7 @@ onKey('escape', ['cmd', 'shift'], () => {
 	const win = Window.focused();
 	cycleBackward(win);
 });
-// TODO did not implement chrome cmd+f fix
+
 // Experimental: Search for windows and cycle between results.
 onKey('space', hyper, () => {
 	const m = new Modal();
