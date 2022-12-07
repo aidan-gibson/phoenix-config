@@ -1,10 +1,26 @@
+https://kasper.github.io/phoenix/ documentation
+
+
+use file watcher (built-in jetbrains plugin)
+
+put .phoenix.js in home. really gotta automate this process. symlinks breaking cuz the entire file is overwritten, can just copy-paste or smth w cli idk
+
+# meta setup
+it's nodejs proj, uses webpack
+run "build" (specified in package.json). this outputs .phoenix.js and phoenix.debug.js in out. put .phoenix.js in home folder. phoenix app (daemon) should catch the change and say (phoenix reloaded) in a modal.
+
+
+how update deps? typings?
 # TODO
+
+* make a Center & Resize (1/3rd width?) keybind which only applies for big screen.
 * memorize all keybinds
 * make sure if statements are turned into 'if/else if' where appropriate.
 * go balls to the walls optimizing , making functions, etc. gonna be extending on this for years and small efficiency gains will be noticed day-to-day.
 * find duplicated code fragments with jetbrains
 * spaces presets
 * look at the example configs to make sure there isn't a better way / look for inspo
+* put this entire repo into dotfiles(?) once i have that sorted out
 ## spaces
 fat presets. i hit one button and it knows what to do with all the windows. 
 
@@ -16,7 +32,10 @@ depends on which apps are in play (vscode can always make small) and screens ava
 # example configs
 https://github.com/kasper/phoenix/wiki
 [documentation](https://kasper.github.io/phoenix/)
-
+# shit it can now do
+input modal
+move windows to spaces
+device sleep/wake https://kasper.github.io/phoenix/api/events/#device
 # hardlink
 `ln phoenix.js ~/.phoenix.js` from out folder
 symlink wasn't working, the phoenix app kept overwriting it. dw tho, hardlink should be just fine (?)

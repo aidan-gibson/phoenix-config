@@ -16,7 +16,7 @@ const scanner = new Scanner();
 // let coffee: TimerStopper | null;
 
 Phoenix.set({
-	daemon: true,
+	daemon: false,
 	openAtLogin: true,
 });
 // only triggers on actual screen change: doesn't trigger on changing focus to another screen
@@ -102,6 +102,9 @@ onKey('tab', hyper, () => {
 		newScreen.flippedVisibleFrame(),
 	);
 	setFrame(win, ratio(win.frame()));
+	if (win) {
+		toggleMaximized(win);
+	}
 });
 // (Jump focused window to next screen whilst maintaining current window size)
 onKey('tab', hyperShift, () => {
