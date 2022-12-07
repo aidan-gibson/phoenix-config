@@ -22,7 +22,7 @@
 		"start": "yarn run watch",
 		"watch": "webpack --watch --config webpack.prod.js",
 		"watch-dev": "webpack --watch --config webpack.dev.js",
-		"build": "webpack --config webpack.prod.js",
+		"build": "webpack --config webpack.prod.js; cp ~/WebstormProjects/phoenix-config/out/.phoenix.js ~/.phoenix.js",
 		"lint": "tslint src/**/*.ts",
 		"format": "prettier --write \"src/**/*.ts\"",
 		"test": "echo \"Error: no test specified\" && exit 1"

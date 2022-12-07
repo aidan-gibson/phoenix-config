@@ -9,8 +9,9 @@ put .phoenix.js in home. really gotta automate this process. symlinks breaking c
 it's nodejs proj, uses webpack
 run "build" (specified in package.json). this outputs .phoenix.js and phoenix.debug.js in out. put .phoenix.js in home folder. phoenix app (daemon) should catch the change and say (phoenix reloaded) in a modal.
 
+`npm update` will update deps and typings
 
-how update deps? typings?
+changed `build` command to also copy the file to home folder
 # TODO
 
 * make a Center & Resize (1/3rd width?) keybind which only applies for big screen.
