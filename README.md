@@ -1,7 +1,19 @@
 https://kasper.github.io/phoenix/ documentation
 https://github.com/mafredri/phoenix-config/tree/main not integrating mouse handler for now
 
-meta+shift left/right is fucked
+fit to grid
+count unminimized windows
+Screen.main().windows({ visible: true });
+how logging work? https://kasper.github.io/phoenix/getting-started/logging-and-debugging
+
+clean up the code to use functions
+all the TODOs in the code
+
+hypershift +left/right is fucked up
+if im in Cmd+F in chrome its fucked
+
+hyper+tab should center 1/3rd if big screen
+hypershift+enter already centers
 # meta setup
 it's nodejs proj, uses webpack
 run "build" (specified in package.json). this outputs .phoenix.js and phoenix.debug.js in out. put .phoenix.js in home folder. phoenix app (daemon) should catch the change and say (phoenix reloaded) in a modal.

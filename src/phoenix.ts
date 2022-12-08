@@ -22,7 +22,53 @@ Phoenix.set({
 Event.on('screensDidChange', () => {
 	log('Screens changed');
 });
-
+// function resize(win: Window) {
+// 	return;
+// }
+// Smaller app sizes:
+// Messages.app 1/6th width 1/2 height (ideal size)
+// Terminal app
+function leftHalf(win: Window) {
+	const {width, height, x, y} = win.screen().flippedVisibleFrame();
+	const frame2 = {width: Math.floor(width / 2), height, x, y};
+	setFrame(win, frame2);
+}
+function rightHalf(win: Window) {
+	const {width, height, x, y} = win.screen().flippedVisibleFrame();
+	const frame2 = {
+		width: Math.floor(width / 2),
+		height,
+		x: x + Math.ceil(width / 2),
+		y,
+	};
+	setFrame(win, frame2);
+}
+function leftThird(win: Window) {
+	const {width, height, x, y} = win.screen().flippedVisibleFrame();
+	const frame2 = {width: Math.floor(width / 3), height, x, y};
+	setFrame(win, frame2);
+}
+function rightThird(win: Window) {
+	const {width, height, x, y} = win.screen().flippedVisibleFrame();
+	const frame2 = {
+		width: Math.floor(width / 3),
+		height,
+		x: Math.ceil((2 * width) / 3),
+		y,
+	};
+	setFrame(win, frame2);
+}
+function centerThird(win: Window) {
+	const {width, height, x, y} = win.screen().flippedVisibleFrame();
+	const frame2 = {
+		width: Math.floor(width / 3),
+		height,
+		// x: x + Math.ceil(width / 2),
+		x: x + width / 2 - win.frame().width / 2,
+		y,
+	};
+	setFrame(win, frame2);
+}
 onKey('=', hyperShift, () => {
 	// wider
 	let win = Window.focused();
@@ -82,50 +128,75 @@ onKey('-', hyperShift, () => {
 });
 // (Jump to next screen whilst keeping relative size and placement)
 onKey('tab', hyper, async () => {
-	let win = Window.focused();
-	if (!win) {
-		return;
+	// todo window ordering from wins is bad. change.
+	// Keep in mind
+	// Array<Window> neighbours(String direction) // or neighbors(...)
+	const screens = Screen.all();
+	// if (1 screen) {
+	if (screens.length === 1) {
+		const wins = Screen.main().windows({visible: true});
+		// arrange them
+		if (wins.length === 2) {
+			leftHalf(wins[0]);
+			rightHalf(wins[1]);
+		}
+		if (wins.length === 3) {
+			leftThird(wins[0]);
+			centerThird(wins[2]);
+			rightThird(wins[1]);
+		}
+		if (wins.length === 4) {
+		}
+		Phoenix.log('YO');
+		Phoenix.log(Screen.main().windows({visible: true}).length);
 	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
+	// if (2+ screens) {
+	else {
+		let win = Window.focused();
 		if (!win) {
 			return;
 		}
-	}
-	const fullscreen = win.isFullScreen();
-	if (fullscreen) {
-		win.setFullScreen(false);
-		// If we don't wait until the animation is finished,
-		// bad things will happen (at least with VS Code).
-		//
-		// 750ms seems to work, but just to be safe.
-		await sleep(900);
-	}
-	const oldScreen = win.screen();
-	const newScreen = oldScreen.next();
+		if (win.title().startsWith('Find in page')) {
+			const location = win.topLeft();
+			location.y -= 1;
+			win = Window.at(location);
+			if (!win) {
+				return;
+			}
+		}
+		const fullscreen = win.isFullScreen();
+		if (fullscreen) {
+			win.setFullScreen(false);
+			// If we don't wait until the animation is finished,
+			// bad things will happen (at least with VS Code).
+			//
+			// 750ms seems to work, but just to be safe.
+			await sleep(900);
+		}
+		const oldScreen = win.screen();
+		const newScreen = oldScreen.next();
 
-	if (oldScreen.isEqual(newScreen)) {
-		return;
-	}
+		if (oldScreen.isEqual(newScreen)) {
+			return;
+		}
 
-	const ratio = frameRatio(
-		oldScreen.flippedVisibleFrame(),
-		newScreen.flippedVisibleFrame(),
-	);
-	setFrame(win, ratio(win.frame()));
+		const ratio = frameRatio(
+			oldScreen.flippedVisibleFrame(),
+			newScreen.flippedVisibleFrame(),
+		);
+		setFrame(win, ratio(win.frame()));
 
-	if (win) {
-		toggleMaximized(win);
-	}
+		if (win) {
+			toggleMaximized(win);
+		}
 
-	if (fullscreen) {
-		await sleep(900);
-		win.setFullScreen(true);
+		if (fullscreen) {
+			await sleep(900);
+			win.setFullScreen(true);
+		}
+		// Force space switch, in case another one is focused on the screen.
+		win.focus();
 	}
-	// Force space switch, in case another one is focused on the screen.
-	win.focus();
 });
 // (Jump focused window to next screen whilst maintaining current window size)
 onKey('tab', hyperShift, () => {
@@ -492,6 +563,10 @@ onKey('return', hyperShift, () => {
 		x: x + sWidth / 2 - width / 2,
 		y: y + sHeight / 2 - height / 2,
 	});
+	// 	TODO for any windows beneath, swap. put them in the space the window that is now covering em used to be
+	// for all visible windows
+	const wins = Screen.main().windows({visible: true});
+	//todo which ones are now underneath?
 });
 // maximum height
 onKey('h', hyperShift, () => {
