@@ -1,5 +1,7 @@
 https://kasper.github.io/phoenix/ documentation
 https://github.com/mafredri/phoenix-config/tree/main integrate sept 18 updates!
+
+meta+shift left/right is fucked
 # meta setup
 it's nodejs proj, uses webpack
 run "build" (specified in package.json). this outputs .phoenix.js and phoenix.debug.js in out. put .phoenix.js in home folder. phoenix app (daemon) should catch the change and say (phoenix reloaded) in a modal.
