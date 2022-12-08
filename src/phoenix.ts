@@ -3,13 +3,12 @@ import {hyper, hyperShift} from './config';
 import {cycleBackward, cycleForward} from './cycle';
 import {onKey} from './key';
 import log from './logger';
-// import {brightness} from './misc/brightness';
-// import {TimerStopper} from './misc/coffee';
-// import coffeTimer from './misc/coffee';
+import coffeeTimer, {TimerStopper} from './misc/coffee';
 // import * as terminal from './misc/terminal';
 import {applyMargin, showCenterOn, titleModal} from './modal';
 import {Scanner} from './scan';
 import {screenAt} from './screen';
+import {sleep} from './util';
 import {setFrame, toggleMaximized} from './window';
 
 const scanner = new Scanner();
@@ -23,9 +22,9 @@ Phoenix.set({
 Event.on('screensDidChange', () => {
 	log('Screens changed');
 });
-// wider. if space on both sides expand both, if kissing right or left edge
-// for now, if top edge isn't
+
 onKey('=', hyperShift, () => {
+	// wider
 	let win = Window.focused();
 	if (!win) {
 		return;
@@ -40,10 +39,16 @@ onKey('=', hyperShift, () => {
 	}
 	const {width, height, x, y} = win.frame();
 	const screenWidth = win.screen().flippedVisibleFrame().width;
+	let newX = x - Math.ceil(screenWidth / 50); // x-half change in width
+	let newWidth = width + Math.floor(screenWidth / 25);
+	if (newX < 0) {
+		newX = 0;
+		newWidth -= Math.floor(screenWidth / 50);
+	}
 	const widerFrame = {
-		width: width + Math.floor(screenWidth / 25),
+		width: newWidth,
 		height,
-		x: x - Math.ceil(screenWidth / 50), // x-half change in width
+		x: newX,
 		y,
 	};
 
@@ -76,7 +81,7 @@ onKey('-', hyperShift, () => {
 	setFrame(win, thinnerFrame);
 });
 // (Jump to next screen whilst keeping relative size and placement)
-onKey('tab', hyper, () => {
+onKey('tab', hyper, async () => {
 	let win = Window.focused();
 	if (!win) {
 		return;
@@ -89,7 +94,15 @@ onKey('tab', hyper, () => {
 			return;
 		}
 	}
-
+	const fullscreen = win.isFullScreen();
+	if (fullscreen) {
+		win.setFullScreen(false);
+		// If we don't wait until the animation is finished,
+		// bad things will happen (at least with VS Code).
+		//
+		// 750ms seems to work, but just to be safe.
+		await sleep(900);
+	}
 	const oldScreen = win.screen();
 	const newScreen = oldScreen.next();
 
@@ -102,9 +115,17 @@ onKey('tab', hyper, () => {
 		newScreen.flippedVisibleFrame(),
 	);
 	setFrame(win, ratio(win.frame()));
+
 	if (win) {
 		toggleMaximized(win);
 	}
+
+	if (fullscreen) {
+		await sleep(900);
+		win.setFullScreen(true);
+	}
+	// Force space switch, in case another one is focused on the screen.
+	win.focus();
 });
 // (Jump focused window to next screen whilst maintaining current window size)
 onKey('tab', hyperShift, () => {

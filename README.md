@@ -1,5 +1,5 @@
 https://kasper.github.io/phoenix/ documentation
-https://github.com/mafredri/phoenix-config/tree/main integrate sept 18 updates!
+https://github.com/mafredri/phoenix-config/tree/main not integrating mouse handler for now
 
 meta+shift left/right is fucked
 # meta setup
