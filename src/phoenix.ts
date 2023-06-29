@@ -566,7 +566,7 @@ onKey('return', hyperShift, () => {
 	// 	TODO for any windows beneath, swap. put them in the space the window that is now covering em used to be
 	// for all visible windows
 	const wins = Screen.main().windows({visible: true});
-	//todo which ones are now underneath?
+	// todo which ones are now underneath?
 });
 // maximum height
 onKey('h', hyperShift, () => {

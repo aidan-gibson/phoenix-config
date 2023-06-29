@@ -1,6 +1,10 @@
 https://kasper.github.io/phoenix/ documentation
 https://github.com/mafredri/phoenix-config/tree/main not integrating mouse handler for now
 
+meta+tab should swap
+
+metashift + arrow: pack it against the next app?
+
 fit to grid
 count unminimized windows
 Screen.main().windows({ visible: true });
