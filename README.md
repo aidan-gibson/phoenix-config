@@ -5,7 +5,7 @@ meta+tab should swap
 
 metashift + arrow: pack it against the next app?
 
-fit to grid
+fit to grid 
 count unminimized windows
 Screen.main().windows({ visible: true });
 how logging work? https://kasper.github.io/phoenix/getting-started/logging-and-debugging
