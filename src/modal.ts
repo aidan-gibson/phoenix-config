@@ -63,10 +63,8 @@ function originOnScreen(
 
 	if (orientation === Orientation.SouthEast) {
 		x = x + width - mWidth;
-		y = y;
 	} else if (orientation === Orientation.SouthWest) {
-		x = x;
-		y = y;
+		// `x` remains the same
 	}
 
 	return {x, y};

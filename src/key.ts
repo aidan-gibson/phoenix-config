@@ -18,15 +18,15 @@ function onKey(
 function onKeySingle(
 	key: Phoenix.KeyIdentifier,
 	mod: Phoenix.ModifierKey[],
-	cb: (handler: Key, repeated: boolean) => Promise<any> | any,
+	cb: (keyHandler: Key, repeated: boolean) => Promise<any> | any,
 ) {
-	const handler = new Key(key, mod, (handler: Key, repeated: boolean) => {
+	const handler = new Key(key, mod, (keyHandler: Key, repeated: boolean) => {
 		const notify = (e: any) => {
 			log.notify(`Key: ${key} + [${mod}]:`, e);
 		};
 
 		try {
-			const ret = cb(handler, repeated);
+			const ret = cb(keyHandler, repeated);
 			if (ret instanceof Promise) {
 				return ret.catch(notify);
 			}
