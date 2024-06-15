@@ -2,7 +2,7 @@
 
 phoenix.ts is entry point, files not imported aren't used.
 
-should update the typescript types and look at phoenix updates
+
 
 
 # old

@@ -439,15 +439,18 @@ onKey(['left', 'j'], hyperShift, () => {
 	}
 
 	const {width, height, y, x: fX} = win.frame();
-	let {width: sWidth, x} = win.screen().flippedVisibleFrame();
-
-	const center = x + Math.ceil(sWidth / 2);
-	const half = Math.floor(width / 2);
-	if (fX + half > center) {
-		x = center - half;
-	}
-
-	setFrame(win, {width, height, y, x});
+	// let {width: sWidth, x} = win.screen().flippedVisibleFrame();
+	//
+	// const center = x + Math.ceil(sWidth / 2);
+	// const half = Math.floor(width / 2);
+	// if (fX + half > center) {
+	// 	x = center - half;
+	// }
+	//
+	// setFrame(win, {width, height, y, x});
+	let {x} = win.screen().flippedVisibleFrame();
+	// TODO(mafredri): Move to next screen when at the edge.
+	setFrame(win, {width, height, y, x: Math.max(x, fX - width)});
 });
 
 onKey(['right', 'l'], hyperShift, () => {
@@ -467,15 +470,22 @@ onKey(['right', 'l'], hyperShift, () => {
 	const {width, height, y, x: fX} = win.frame();
 	let {width: sWidth, x} = win.screen().flippedVisibleFrame();
 
-	const center = x + Math.floor(sWidth / 2);
-	const half = Math.ceil(width / 2);
-	if (fX + half < center) {
-		x = center - half;
-	} else {
-		x = x + sWidth - width;
-	}
-
-	setFrame(win, {width, height, y, x});
+	// const center = x + Math.floor(sWidth / 2);
+	// const half = Math.ceil(width / 2);
+	// if (fX + half < center) {
+	// 	x = center - half;
+	// } else {
+	// 	x = x + sWidth - width;
+	// }
+	//
+	// setFrame(win, {width, height, y, x});
+	const sEdge = x + sWidth - width;
+	setFrame(win, {
+		width,
+		height,
+		y,
+		x: Math.min(sEdge, fX + width),
+	});
 });
 
 onKey(['up', 'i'], hyperShift, () => {
@@ -493,15 +503,17 @@ onKey(['up', 'i'], hyperShift, () => {
 	}
 
 	const {width, height, x, y: frameY} = win.frame();
-	let {height: sHeight, y} = win.screen().flippedVisibleFrame();
-
-	const center = Math.ceil(y + sHeight / 2);
-	const half = Math.floor(height / 2);
-	if (frameY + half > center) {
-		y = center - half;
-	}
-
-	setFrame(win, {width, height, x, y});
+	// let {height: sHeight, y} = win.screen().flippedVisibleFrame();
+	//
+	// const center = Math.ceil(y + sHeight / 2);
+	// const half = Math.floor(height / 2);
+	// if (frameY + half > center) {
+	// 	y = center - half;
+	// }
+	// setFrame(win, {width, height, x, y});
+	let {y} = win.screen().flippedVisibleFrame();
+	// TODO(mafredri): Move to next screen when at the edge.
+	setFrame(win, {width, height, x, y: Math.max(y, frameY - height)});
 });
 
 onKey(['down', 'k'], hyperShift, () => {
@@ -521,15 +533,18 @@ onKey(['down', 'k'], hyperShift, () => {
 	const {width, height, x, y: frameY} = win.frame();
 	let {height: sHeight, y} = win.screen().flippedVisibleFrame();
 
-	const center = Math.floor(y + sHeight / 2);
-	const half = Math.ceil(height / 2);
-	if (frameY + half < center) {
-		y = center - half;
-	} else {
-		y = y + sHeight - height;
-	}
-
-	setFrame(win, {width, height, x, y});
+	// const center = Math.floor(y + sHeight / 2);
+	// const half = Math.ceil(height / 2);
+	// if (frameY + half < center) {
+	// 	y = center - half;
+	// } else {
+	// 	y = y + sHeight - height;
+	// }
+	//
+	// setFrame(win, {width, height, x, y});
+	const sEdge = y + sHeight - height;
+	// TODO(mafredri): Move to next screen when at the edge.
+	setFrame(win, {width, height, x, y: Math.min(sEdge, frameY + height)});
 });
 
 onKey('return', hyperShift, () => {
@@ -701,105 +716,6 @@ onKey('escape', ['cmd'], () => {
 onKey('escape', ['cmd', 'shift'], () => {
 	const win = Window.focused();
 	cycleBackward(win);
-});
-
-// Experimental: Search for windows and cycle between results.
-onKey('space', hyper, () => {
-	const m = new Modal();
-	const msg = 'Search: ';
-	m.text = msg;
-	showCenterOn(m, Screen.main());
-	const originalWindow = Window.focused();
-	const winCache = Window.all({visible: true});
-	let matches = [...winCache];
-
-	// Prevent modal from hopping from screen to screen.
-	const mainScreen = Screen.main();
-
-	// Since we focus the first window, start in reverse mode.
-	let prevReverse = true;
-
-	function nextWindow(reverse: boolean): Window | undefined {
-		if (prevReverse !== reverse) {
-			prevReverse = reverse;
-			nextWindow(reverse); // Rotate.
-		}
-
-		const w = reverse ? matches.pop() : matches.shift();
-		if (!w) {
-			return;
-		}
-		reverse ? matches.unshift(w) : matches.push(w);
-		return w;
-	}
-
-	const tabFn = (reverse: boolean) => () => {
-		if (!matches.length) {
-			return;
-		}
-
-		const w = nextWindow(reverse);
-		if (!w) {
-			return;
-		}
-
-		w.focus();
-		m.icon = w.app().icon();
-		showCenterOn(m, mainScreen);
-	};
-
-	const tab = new Key('tab', [], tabFn(false));
-	const shiftTab = new Key('tab', ['shift'], tabFn(true));
-
-	scanner.scanln(
-		(s) => {
-			m.close();
-			tab.disable();
-			shiftTab.disable();
-			if (s === '' && originalWindow) {
-				// No window selected, restore original.
-				originalWindow.focus();
-
-				// Window management on macOS with multiple monitors is pretty
-				// bad, the right window might not be focused when an app is not
-				// focused and has multiple windows on multiple monitors.
-				setTimeout(() => originalWindow.focus(), 200);
-			}
-		},
-		(s) => {
-			tab.enable();
-			shiftTab.enable();
-
-			prevReverse = true; // Reset.
-
-			matches = winCache.filter((w) => appName(w) || title(w));
-			m.text = msg + s + (s ? results(matches.length) : '');
-
-			if (s && matches.length) {
-				matches[0].focus();
-				m.icon = matches[0].app().icon();
-			} else {
-				if (originalWindow) {
-					originalWindow.focus();
-				}
-				m.icon = undefined;
-			}
-
-			showCenterOn(m, mainScreen);
-
-			function appName(w: Window) {
-				return w.app().name().toLowerCase().match(s.toLowerCase());
-			}
-
-			function title(w: Window) {
-				return w.title().toLowerCase().match(s.toLowerCase());
-			}
-		},
-	);
-
-	function results(n: number) {
-		return `\n${n} results`;
-	}
 });
 
 // Always hide apps, even if they're the last one on the desktop.
