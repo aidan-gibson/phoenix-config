@@ -1,3 +1,11 @@
+# 2025 re-examine
+
+phoenix.ts is entry point, files not imported aren't used.
+
+should update the typescript types and look at phoenix updates
+
+
+# old
 https://kasper.github.io/phoenix/ documentation
 https://github.com/mafredri/phoenix-config/tree/main not integrating mouse handler for now
 

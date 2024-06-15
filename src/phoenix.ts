@@ -3,7 +3,6 @@ import {hyper, hyperShift} from './config';
 import {cycleBackward, cycleForward} from './cycle';
 import {onKey} from './key';
 import log from './logger';
-// import * as terminal from './misc/terminal';
 import {applyMargin, showCenterOn, titleModal} from './modal';
 import {Scanner} from './scan';
 import {screenAt} from './screen';
@@ -11,7 +10,6 @@ import {sleep} from './util';
 import {setFrame, toggleMaximized} from './window';
 
 const scanner = new Scanner();
-// let coffee: TimerStopper | null;
 
 Phoenix.set({
 	daemon: false,
