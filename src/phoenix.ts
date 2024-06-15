@@ -228,15 +228,6 @@ onKey(['left', 'j'], hyper, () => {
 	if (!win) {
 		return;
 	}
-	// fixes Chrome Cmd+F issues
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
-	}
 	const {width, height, x, y} = win.screen().flippedVisibleFrame();
 	log('HEIGHT', height);
 	// TODO apply this to hyper+right also
@@ -279,14 +270,6 @@ onKey(['right', 'l'], hyper, () => {
 	log(win?.title());
 	if (!win) {
 		return;
-	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
 	}
 
 	const {width, height, x, y} = win.screen().flippedVisibleFrame();

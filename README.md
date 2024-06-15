@@ -21,7 +21,6 @@ how logging work? https://kasper.github.io/phoenix/getting-started/logging-and-d
 clean up the code to use functions
 all the TODOs in the code
 
-hypershift +left/right is fucked up
 if im in Cmd+F in chrome its fucked
 
 hyper+tab should center 1/3rd if big screen
