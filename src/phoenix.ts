@@ -3,7 +3,6 @@ import {hyper, hyperShift} from './config';
 import {cycleBackward, cycleForward} from './cycle';
 import {onKey} from './key';
 import log from './logger';
-import coffeeTimer, {TimerStopper} from './misc/coffee';
 // import * as terminal from './misc/terminal';
 import {applyMargin, showCenterOn, titleModal} from './modal';
 import {Scanner} from './scan';
