@@ -72,14 +72,7 @@ onKey('=', hyperShift, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
-	}
+
 	const {width, height, x, y} = win.frame();
 	const screenWidth = win.screen().flippedVisibleFrame().width;
 	let newX = x - Math.ceil(screenWidth / 50); // x-half change in width
@@ -104,14 +97,7 @@ onKey('-', hyperShift, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
-	}
+
 	const {width, height, x, y} = win.frame();
 	const screenWidth = win.screen().flippedVisibleFrame().width;
 	const thinnerFrame = {
@@ -153,14 +139,6 @@ onKey('tab', hyper, async () => {
 		if (!win) {
 			return;
 		}
-		if (win.title().startsWith('Find in page')) {
-			const location = win.topLeft();
-			location.y -= 1;
-			win = Window.at(location);
-			if (!win) {
-				return;
-			}
-		}
 		const fullscreen = win.isFullScreen();
 		if (fullscreen) {
 			win.setFullScreen(false);
@@ -200,14 +178,6 @@ onKey('tab', hyperShift, () => {
 	let win = Window.focused();
 	if (!win) {
 		return;
-	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
 	}
 	const oldScreen = win.screen();
 	const newScreen = oldScreen.next();
@@ -351,14 +321,6 @@ onKey(['up', 'i'], hyper, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
-	}
 
 	const {width, x} = win.frame();
 	let {height, y} = win.screen().flippedVisibleFrame();
@@ -371,14 +333,6 @@ onKey(['down', 'k'], hyper, () => {
 	let win = Window.focused();
 	if (!win) {
 		return;
-	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
 	}
 
 	const {width, x} = win.frame();
@@ -394,14 +348,7 @@ onKey('return', hyper, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
-	}
+
 	if (win) {
 		toggleMaximized(win);
 	}
@@ -411,14 +358,6 @@ onKey(['left', 'j'], hyperShift, () => {
 	let win = Window.focused();
 	if (!win) {
 		return;
-	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
 	}
 
 	const {width, height, y, x: fX} = win.frame();
@@ -440,14 +379,6 @@ onKey(['right', 'l'], hyperShift, () => {
 	let win = Window.focused();
 	if (!win) {
 		return;
-	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
 	}
 
 	const {width, height, y, x: fX} = win.frame();
@@ -476,14 +407,6 @@ onKey(['up', 'i'], hyperShift, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
-	}
 
 	const {width, height, x, y: frameY} = win.frame();
 	// let {height: sHeight, y} = win.screen().flippedVisibleFrame();
@@ -503,14 +426,6 @@ onKey(['down', 'k'], hyperShift, () => {
 	let win = Window.focused();
 	if (!win) {
 		return;
-	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
 	}
 
 	const {width, height, x, y: frameY} = win.frame();
@@ -534,14 +449,6 @@ onKey('return', hyperShift, () => {
 	let win = Window.focused();
 	if (!win) {
 		return;
-	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
 	}
 
 	const {width, height} = win.frame();
@@ -569,14 +476,7 @@ onKey('h', hyperShift, () => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
-	}
+
 	const {width, x} = win.frame();
 	const {height, y} = win.screen().flippedVisibleFrame();
 	const finalRect = {
@@ -593,14 +493,6 @@ onKey('h', hyperShift, () => {
 // 	let win = Window.focused();
 // 	if (!win) {
 // 		return;
-// 	}
-// 	if (win.title().startsWith('Find in page')) {
-// 		const location = win.topLeft();
-// 		location.y -= 1;
-// 		win = Window.at(location);
-// 		if (!win) {
-// 			return;
-// 		}
 // 	}
 // 	const app = win.app().name();
 // 	const bundleId = win.app().bundleIdentifier();
@@ -632,14 +524,6 @@ onKey('h', hyperShift, () => {
 // 	if (!win) {
 // 		return;
 // 	}
-// 	if (win.title().startsWith('Find in page')) {
-// 		const location = win.topLeft();
-// 		location.y -= 1;
-// 		win = Window.at(location);
-// 		if (!win) {
-// 			return;
-// 		}
-// 	}
 // 	if (win) {
 // 		log(
 // 			win
@@ -660,14 +544,6 @@ onKey('m', hyperShift, () => {
 	let win = Window.focused();
 	if (!win) {
 		return;
-	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
 	}
 	Phoenix.log('MINIMIZE CODE');
 	log('MINIMIZE CODE');
