@@ -714,14 +714,6 @@ onKey('h', ['cmd'], (_: Key, repeated: boolean) => {
 	if (!win) {
 		return;
 	}
-	if (win.title().startsWith('Find in page')) {
-		const location = win.topLeft();
-		location.y -= 1;
-		win = Window.at(location);
-		if (!win) {
-			return;
-		}
-	}
 
 	if (win) {
 		win.app().hide();
